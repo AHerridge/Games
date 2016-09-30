@@ -1,0 +1,35 @@
+package jrAlex.core.math.force;
+
+public class Force4D extends Force
+{
+	public static enum Direction
+	{
+		NORTH, EAST, SOUTH, WEST;
+		
+		int i;
+		private int index;
+		
+		private Direction()
+		{
+			
+		}
+	}
+
+	public Force4D(int size)
+	{
+		super(size);
+	}
+
+	public Force4D(double north, double east, double south, double west)
+	{
+		super(new double[]
+		{
+				north, east, south, west
+		});
+	}
+
+	public double get(Direction dir)
+	{
+		return Direction.
+	}
+}

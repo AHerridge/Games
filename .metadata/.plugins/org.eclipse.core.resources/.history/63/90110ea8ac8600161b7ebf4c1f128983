@@ -1,0 +1,12 @@
+package jrAlex.core.world;
+
+public class WorldObject
+{
+	protected World world;
+	
+	public WorldObject()
+	{
+		// TODO Auto-generated constructor stub
+	}
+
+}

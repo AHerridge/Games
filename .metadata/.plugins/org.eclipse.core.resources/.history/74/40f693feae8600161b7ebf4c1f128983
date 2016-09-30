@@ -1,0 +1,23 @@
+package jrAlex;
+
+import jrAlex.core.math.force.Direction;
+import jrAlex.core.world.Entity;
+import jrAlex.core.world.World;
+
+public class Main
+{
+	public static void main(String[] args)
+	{
+		Entity entity1 = new Entity(new World(), 16, 16);
+		System.out.println(entity1.toString());
+		entity1.addForce(Direction.NORTH, 10);
+		entity1.update(16);
+		System.out.println(entity1.toString());
+		entity1.update(16);
+		System.out.println(entity1.toString());
+		entity1.update(16);
+		System.out.println(entity1.toString());
+		entity1.update(16);
+		System.out.println(entity1.toString());
+	}
+}

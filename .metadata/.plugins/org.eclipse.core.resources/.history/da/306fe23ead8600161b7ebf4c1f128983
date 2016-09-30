@@ -1,0 +1,10 @@
+package jrAlex.core.world;
+
+public class StaticEntity extends WorldObject
+{
+	public StaticEntity()
+	{
+		
+	}
+
+}

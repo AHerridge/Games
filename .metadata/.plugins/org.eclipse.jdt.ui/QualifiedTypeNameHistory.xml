@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="jrAlex.core.math.force.Force4D.Directions"/>
+<fullyQualifiedTypeName name="jrAlex.core.math.force.Force4D.Direction"/>
+<fullyQualifiedTypeName name="jrAlex.core.math.force.Force4D"/>
+<fullyQualifiedTypeName name="jrAlex.core.math.force.Direction"/>
+<fullyQualifiedTypeName name="jrAlex.core.world.Entity"/>
+<fullyQualifiedTypeName name="jrAlex.core.math.vector.Vector"/>
+<fullyQualifiedTypeName name="jrAlex.core.world.World"/>
+<fullyQualifiedTypeName name="java.awt.Graphics2D"/>
+<fullyQualifiedTypeName name="jrAlex.core.world.WorldObject"/>
+<fullyQualifiedTypeName name="java.lang.Readable"/>
+<fullyQualifiedTypeName name="java.awt.Rectangle"/>
+<fullyQualifiedTypeName name="jrAlex.core.math.vector.Vector2D"/>
+<fullyQualifiedTypeName name="java.awt.image.BufferedImage"/>
+</qualifiedTypeNameHistroy>

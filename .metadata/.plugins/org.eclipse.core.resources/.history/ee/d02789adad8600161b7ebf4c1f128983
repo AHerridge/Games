@@ -1,0 +1,25 @@
+package jrAlex.core.world;
+
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
+
+import jrAlex.core.math.vector.Vector2D;
+
+public abstract class WorldObject
+{
+	protected final Vector2D	pos;
+	protected final World		world;
+	protected int				width, height;
+
+	public WorldObject(World world)
+	{
+		this.world = world;
+		pos = new Vector2D();
+	}
+
+	public abstract void update(int delta);
+
+	public abstract void render(Graphics2D g2d);
+
+	public abstract Rectangle getCollider();
+}

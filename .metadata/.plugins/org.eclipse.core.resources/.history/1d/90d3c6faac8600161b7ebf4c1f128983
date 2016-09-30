@@ -1,0 +1,17 @@
+package jrAlex.core.world;
+
+import java.awt.Graphics2D;
+
+public abstract class WorldObject
+{
+	protected World world;
+
+	public WorldObject(World world)
+	{
+		this.world = world;
+	}
+
+	public abstract void update(int delta);
+
+	public abstract void render(Graphics2D g2d);
+}

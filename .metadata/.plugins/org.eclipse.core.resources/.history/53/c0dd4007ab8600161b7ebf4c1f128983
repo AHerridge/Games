@@ -1,0 +1,41 @@
+package jrAlex.core.world;
+
+import jrAlex.core.math.force.Direction;
+import jrAlex.core.math.force.Force4D;
+import jrAlex.core.math.vector.Vector2D;
+
+public class Entity
+{
+	private Vector2D	pos;
+	private Force4D		forces;
+	private double		accel;
+
+	public Entity()
+	{
+		pos = new Vector2D();
+		forces = new Force4D();
+		accel = 100 / 1000;
+	}
+
+	public void update(int delta)
+	{
+		move(delta);
+	}
+
+	public void move(int delta)
+	{
+		Vector2D vel = forces.getVel();
+		vel.mult(delta * accel);
+		pos.add(vel);
+	}
+
+	public void addForce(Direction dir, double value)
+	{
+		forces.addForce(dir, value);
+	}
+
+	public String toString()
+	{
+		return "Pos: " + pos.toString() + " Forces: " + forces.toString();
+	}
+}

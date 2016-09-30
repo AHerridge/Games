@@ -1,0 +1,22 @@
+package jrAlex.core.math.force;
+
+public class Force4D extends Force
+{
+	public Force4D(int size)
+	{
+		super(size);
+	}
+
+	public Force4D(double north, double east, double south, double west)
+	{
+		super(new double[]
+		{
+				north, east, south, west
+		});
+	}
+
+	public double getNorth()
+	{
+		return values[0];
+	}
+}

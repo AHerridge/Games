@@ -1,0 +1,12 @@
+package jrAlex.core.math.force;
+
+public class Force4D extends Force
+{
+
+	public Force4D(double[] values)
+	{
+		super(values);
+		// TODO Auto-generated constructor stub
+	}
+
+}

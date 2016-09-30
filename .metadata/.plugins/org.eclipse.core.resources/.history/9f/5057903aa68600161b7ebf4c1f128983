@@ -1,0 +1,6 @@
+package jrAlex.core.math.force;
+
+public enum Direction
+{
+
+}

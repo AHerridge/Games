@@ -1,0 +1,14 @@
+package jrAlex.core.world;
+
+public abstract class WorldObject
+{
+	protected World world;
+	
+	public WorldObject(World world)
+	{
+		this.world = world;
+	}
+
+	public void update(int delta)
+	
+}

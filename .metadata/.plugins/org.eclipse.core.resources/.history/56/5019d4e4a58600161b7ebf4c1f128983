@@ -1,0 +1,10 @@
+package jrAlex.core.world;
+
+import jrAlex.core.math.force.Force4D;
+import jrAlex.core.math.vector.Vector2D;
+
+public class Entity
+{
+	private Vector2D	pos;
+	private Force4D		forces;
+}

@@ -1,0 +1,26 @@
+package jrAlex.core.world;
+
+import java.awt.Graphics2D;
+
+public class StaticEntity extends WorldObject
+{
+	public StaticEntity(World world)
+	{
+		super(world);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void update(int delta)
+	{
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void render(Graphics2D g2d)
+	{
+		// TODO Auto-generated method stub
+
+	}
+}

@@ -1,0 +1,11 @@
+package jrAlex.core.world;
+
+public class StaticEntity
+{
+
+	public StaticEntity()
+	{
+		
+	}
+
+}

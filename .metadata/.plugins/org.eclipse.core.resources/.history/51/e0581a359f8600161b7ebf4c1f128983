@@ -1,0 +1,13 @@
+package jrAlex.core.math.force;
+
+/**
+ * Created on 9/13/2016.
+ */
+
+public class Force2D extends Force
+{
+	public Force2D(double x, double y)
+	{
+		super(new double[]{x, y});
+	}
+}

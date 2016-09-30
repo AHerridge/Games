@@ -1,0 +1,13 @@
+package jrAlex.core.force;
+
+/**
+ * Created on 9/13/2016.
+ */
+
+public class Force3D extends Force
+{
+	public Force3D(double x, double y, double z)
+	{
+		super(new double[]{x, y, z});
+	}
+}
