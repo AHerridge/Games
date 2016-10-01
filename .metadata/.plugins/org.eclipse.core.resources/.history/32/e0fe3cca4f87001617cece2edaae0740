@@ -1,0 +1,52 @@
+package jrAlex.core.world;
+
+import java.awt.Graphics2D;
+
+import jrAlex.core.math.vector.Vec2;
+
+public class Entity extends WorldObject
+{
+	protected double	vel;
+	protected double	mass;
+	protected double	bounce;
+
+	public Entity(World world, int x, int y, int w, int h)
+	{
+		super(world, x, y, w, h);
+	}
+
+	public void update(int delta)
+	{
+		move(delta);
+	}
+
+	public void render(Graphics2D g2d)
+	{
+
+	}
+
+	private void move(int delta)
+	{
+
+	}
+
+	public String toString()
+	{
+		return super.toString() + " Vel: " + vel;
+	}
+
+	public Vec2 getVel()
+	{
+		return vel;
+	}
+
+	public double getMass()
+	{
+		return mass;
+	}
+
+	public double getBounce()
+	{
+		return bounce;
+	}
+}

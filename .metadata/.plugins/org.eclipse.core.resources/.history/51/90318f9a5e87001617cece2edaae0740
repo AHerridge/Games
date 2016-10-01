@@ -1,0 +1,13 @@
+package jrAlex.core;
+
+import java.util.ArrayList;
+
+public class World
+{
+	protected ArrayList<WorldObject> objects;
+
+	public World()
+	{
+
+	}
+}

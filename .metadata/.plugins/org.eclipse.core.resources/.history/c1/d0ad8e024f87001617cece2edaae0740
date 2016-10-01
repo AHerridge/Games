@@ -1,0 +1,46 @@
+package jrAlex.core.world;
+
+import static jrAlex.core.math.vector.Vec2.X;
+import static jrAlex.core.math.vector.Vec2.Y;
+
+import jrAlex.core.math.vector.Vec2;
+
+public class CollisionHandler
+{
+
+	public CollisionHandler()
+	{
+		// TODO Auto-generated constructor stub
+	}
+
+	public static void ResolveCollision( Entity a, Entity b )
+	{
+	  // Calculate relative velocity
+	  Vec2 rv = b.vel;
+	  rv.sub(a.vel);
+	 
+	  // Calculate relative velocity in terms of the normal direction
+	  double velAlongNormal = dotProduct( rv, a.pos );
+	 
+	  // Do not resolve if velocities are separating
+	  if(velAlongNormal > 0)
+	    return;
+	 
+	  // Calculate restitution
+	  double e = Math.min( a.bounce, b.bounce);
+	 
+	  // Calculate impulse scalar
+	  double j = -(1 + e) * velAlongNormal
+	  j /= 1 / A.mass + 1 / B.mass
+	 
+	  // Apply impulse
+	  Vec2 impulse = j * normal
+	  A.velocity -= 1 / A.mass * impulse
+	  B.velocity += 1 / B.mass * impulse
+	}
+
+	public static double dotProduct(Vec2 a, Vec2 b)
+	{
+		return a.getValue(X) * b.getValue(X) + a.getValue(Y) + b.getValue(Y);
+	}
+}

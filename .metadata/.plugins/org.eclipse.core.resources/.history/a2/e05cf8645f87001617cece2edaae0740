@@ -1,0 +1,26 @@
+package jrAlex.core;
+
+import java.util.ArrayList;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
+public class Entity extends WorldObject
+{
+	protected Direction dir;
+
+	public Entity(int col, int row, int width, int height, World world)
+	{
+		super(col, row, width, height, world);
+	}
+
+	public void move(int colShift, int rowShift)
+	{
+		bounds.x += colShift;
+		bounds.y += rowShift;
+	}
+	
+	public List<WorldObject> getCollisions()
+	{
+		return world.getObjects().stream().filter(wo -> wo.bounds.contains(this.bounds)).map(null).collect(Collectors.toList());
+	}
+}

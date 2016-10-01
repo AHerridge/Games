@@ -1,0 +1,28 @@
+package jrAlex.core.math.vector;
+
+/**
+ * Created on 9/13/2016.
+ */
+
+public class Vec2 extends Vec
+{
+	public static final int X = 0, Y = 1;
+
+	public Vec2()
+	{
+		super(2);
+	}
+
+	public Vec2(double x, double y)
+	{
+		super(new double[]
+		{
+				x, y
+		});
+	}
+
+	public double dotProduct(Vec2 b)
+	{
+		return getValue(X) * b.getValue(X) + getValue(Y) + b.getValue(Y);
+	}
+}

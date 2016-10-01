@@ -1,0 +1,22 @@
+package jrAlex.core;
+
+import java.awt.image.BufferedImage;
+import java.util.HashMap;
+import java.util.Map;
+
+public final class Images
+{
+	private static final Map<String, BufferedImage> map = new HashMap<>();
+
+	public static BufferedImage getImage(String name)
+	{
+		if(!map.containsKey(name))
+			map.put(name, );
+		return map.get(name);
+	}
+
+	private static BufferedImage loadImage(String name)
+	{
+		
+	}
+}

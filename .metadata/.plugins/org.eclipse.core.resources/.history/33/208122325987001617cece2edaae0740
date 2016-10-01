@@ -1,0 +1,20 @@
+package jrAlex.core;
+
+import org.dyn4j.dynamics.World;
+
+public class Game extends SimulationFrame
+{
+	private static final long serialVersionUID = 1L;
+
+	public Game()
+	{
+		super("Sokoban", 100);
+		run();
+	}
+
+	@Override
+	protected void initializeWorld()
+	{
+		this.world.setGravity(World.ZERO_GRAVITY);
+	}
+}

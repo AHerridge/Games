@@ -1,0 +1,19 @@
+package jrAlex.core;
+
+import org.dyn4j.samples.SimulationFrame;
+
+public class Game extends SimulationFrame
+{
+	public Game(String name, double scale)
+	{
+		super("Sokoban", 100);
+		canvas.getGraphics().drawLine(100, 100, 200, 100);
+	}
+
+	@Override
+	protected void initializeWorld()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+}

@@ -1,0 +1,9 @@
+package jrAlex.core;
+
+public class Wall extends WorldObject
+{
+	public Wall(int col, int row, int width, int height, World world)
+	{
+		super(col, row, width, height, world);
+	}
+}

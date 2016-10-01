@@ -1,0 +1,23 @@
+package jrAlex.core;
+
+import java.awt.Rectangle;
+
+public class WorldObject
+{
+	protected Rectangle	bounds;
+	protected World		world;
+
+	public WorldObject(int col, int row, int width, int height, World world)
+	{
+		super();
+		bounds = new Rectangle(col, row, width, height);
+		this.world = world;
+	}
+	
+	public vo
+
+	public Rectangle getBounds()
+	{
+		return bounds;
+	}
+}

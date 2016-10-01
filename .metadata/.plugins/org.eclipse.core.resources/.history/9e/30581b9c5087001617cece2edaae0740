@@ -1,0 +1,12 @@
+package jrAlex;
+
+import jrAlex.core.world.Entity;
+import jrAlex.core.world.World;
+
+public class Main
+{
+	public static void main(String[] args)
+	{
+		
+	}
+}

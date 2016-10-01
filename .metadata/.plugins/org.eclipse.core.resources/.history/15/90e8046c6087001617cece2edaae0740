@@ -1,0 +1,15 @@
+package jrAlex.core;
+
+import java.awt.Point;
+
+public enum Direction
+{
+	NORTH, EAST, SOUTH, WEST;
+	
+	public Point change;
+	
+	private Direction()
+	{
+		
+	}
+}

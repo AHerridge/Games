@@ -1,0 +1,17 @@
+package jrAlex.core;
+
+public class WorldObject
+{
+	protected int col, row, width, height;
+	protected World world;
+	
+	public WorldObject(int col, int row, int width, int height, World world)
+	{
+		super();
+		this.col = col;
+		this.row = row;
+		this.width = width;
+		this.height = height;
+		this.world = world;
+	}
+}

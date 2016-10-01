@@ -1,0 +1,11 @@
+package jrAlex;
+
+public class SimulationFrame
+{
+
+	public SimulationFrame()
+	{
+		// TODO Auto-generated constructor stub
+	}
+
+}

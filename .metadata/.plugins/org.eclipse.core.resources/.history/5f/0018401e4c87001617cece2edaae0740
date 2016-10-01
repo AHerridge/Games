@@ -1,0 +1,46 @@
+package jrAlex.core.world;
+
+import java.awt.Graphics2D;
+
+import jrAlex.core.math.force.Direction;
+import jrAlex.core.math.vector.Vec2;
+
+public class Entity extends WorldObject
+{
+	private Vec2	vel;
+	private double	accel;
+
+	public Entity(World world, int x, int y, int w, int h)
+	{
+		super(world, x, y, w, h);
+		vel = new Vec2();
+		accel = 200.0 / 1000;
+	}
+
+	public void update(int delta)
+	{
+		move(delta);
+	}
+
+	public void render(Graphics2D g2d)
+	{
+
+	}
+
+	private void move(int delta)
+	{
+		Vec2 vel = this.vel;
+		vel.mult(delta * accel);
+		pos.add(vel);
+	}
+
+	public void addForceX(double value)
+	{
+		vel.setValue(0, vel.getValue(0) + value);
+	}
+
+	public String toString()
+	{
+		return super.toString() + " Forces: " + forces.toString();
+	}
+}

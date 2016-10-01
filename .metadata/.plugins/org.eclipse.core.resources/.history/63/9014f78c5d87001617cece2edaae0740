@@ -1,0 +1,12 @@
+package jrAlex.core;
+
+public class Entity extends WorldObject
+{
+	protected Direction dir;
+
+	public Entity(int col, int row)
+	{
+		super(col, row);
+		// TODO Auto-generated constructor stub
+	}
+}

@@ -1,0 +1,16 @@
+package jrAlex.core;
+
+public class Entity extends WorldObject
+{
+	protected Direction dir;
+
+	public Entity(int col, int row)
+	{
+		super(col, row);
+	}
+
+	public void move(int colShift, int rowShift)
+	{
+
+	}
+}
