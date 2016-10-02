@@ -1,4 +1,3 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename resource &apos;Sokoban/res/levels/test3.lvl&apos; to &apos;test2.lvl&apos;" description="Rename resource &apos;test3.lvl&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="res/levels/test3.lvl" name="test2.lvl" stamp="1475369564903" updateReferences="true"/>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;Sokoban/res/levels/test3.lvl&apos; to &apos;test2.lvl&apos;" description="Rename resource &apos;test3.lvl&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="res/levels/test3.lvl" name="test2.lvl" stamp="1475369564903" updateReferences="true"/>&#x0A;<refactoring accessors="true" comment="Delete element from project &apos;Sokoban&apos;&#x0D;&#x0A;- Original project: &apos;Sokoban&apos;&#x0D;&#x0A;- Original element: &apos;jrAlex.core.KeyTracker.java&apos;" description="Delete element" element1="/src&lt;jrAlex.core{KeyTracker.java" elements="1" flags="589830" id="org.eclipse.jdt.ui.delete" resources="0" stamp="1475445320041" subPackages="false" version="1.0"/>
 </session>

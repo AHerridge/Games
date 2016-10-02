@@ -11,9 +11,9 @@ public class Main
 		
 		while(true)
 		{
-			Thread.sleep(135);
+			Thread.sleep(16);
 			MainWindow.getInstance().repaint();
-			MainWindow.getInstance().update(135);
+			MainWindow.getInstance().update(16);
 		}
 	}
 }

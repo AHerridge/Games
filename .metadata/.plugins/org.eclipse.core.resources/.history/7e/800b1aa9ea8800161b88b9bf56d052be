@@ -1,0 +1,16 @@
+package jrAlex.core;
+
+import javax.swing.JPanel;
+import javax.swing.KeyStroke;
+
+public abstract class View extends JPanel
+{
+	private static final long serialVersionUID = 1L;
+
+	public abstract void update(int delta);
+	
+	public void addKeybind(char key)
+	{
+		getInputMap().put(KeyStroke.getKeyStroke(key), arg1);
+	}
+}

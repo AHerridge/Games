@@ -55,8 +55,13 @@ public class World
 
 	public void changePlayerDir(Direction newDir)
 	{
+		getPlayer().changeDir(newDir);
+	}
+
+	public WorldObject getPlayer()
+	{
 		Point playerCoords = getPlayerCoords();
-		objects[playerCoords.y][playerCoords.x].changeDir(newDir);
+		return objects[playerCoords.y][playerCoords.x];
 	}
 
 	public boolean moveObject(int oldCol, int oldRow, int newCol, int newRow)

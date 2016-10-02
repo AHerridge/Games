@@ -42,12 +42,17 @@
 <fullyQualifiedTypeName name="java.awt.Point"/>
 <fullyQualifiedTypeName name="java.lang.Override"/>
 <fullyQualifiedTypeName name="jrAlex.core.View"/>
-<fullyQualifiedTypeName name="jrAlex.core.WorldObject"/>
 <fullyQualifiedTypeName name="com.jogamp.newt.event.KeyListener"/>
-<fullyQualifiedTypeName name="jrAlex.core.Direction"/>
 <fullyQualifiedTypeName name="jrAlex.core.WorldView.KeyboardControl"/>
 <fullyQualifiedTypeName name="java.awt.event.KeyListener"/>
 <fullyQualifiedTypeName name="jrAlex.core.ObjectType"/>
 <fullyQualifiedTypeName name="java.lang.NegativeArraySizeException"/>
 <fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="java.awt.event.KeyEvent"/>
+<fullyQualifiedTypeName name="java.awt.event.ActionEvent"/>
+<fullyQualifiedTypeName name="jrAlex.core.WorldObject"/>
+<fullyQualifiedTypeName name="javax.swing.KeyStroke"/>
+<fullyQualifiedTypeName name="jrAlex.core.WorldView.PlayerMoveAction"/>
+<fullyQualifiedTypeName name="jrAlex.core.Direction"/>
+<fullyQualifiedTypeName name="javax.swing.AbstractAction"/>
 </qualifiedTypeNameHistroy>

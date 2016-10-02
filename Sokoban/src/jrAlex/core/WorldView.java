@@ -4,7 +4,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
-import java.awt.event.KeyEvent;
+import java.awt.event.ActionEvent;
+
+import javax.swing.AbstractAction;
 
 public class WorldView extends View
 {
@@ -12,20 +14,48 @@ public class WorldView extends View
 
 	protected int				scale, i, widthInBlocks, heightInBlocks;
 	protected World				world;
-	protected KeyTracker		keyTracker;
+	protected boolean			drawMinimap;
 
 	public WorldView(int scale)
 	{
 		setSize(MainWindow.getInstance().getWidth(), MainWindow.getInstance().getHeight());
-		this.i = 2;
+		this.i = -1;
 		this.scale = scale;
 		this.widthInBlocks = getWidth() / scale;
 		this.heightInBlocks = getHeight() / scale;
+		this.drawMinimap = false;
 		loadNext();
 		setBackground(Color.white);
-		addKeyListener(keyTracker = new KeyTracker());
 		setFocusable(true);
 		grabFocus();
+		addKeybind("W", new PlayerMoveAction(Direction.NORTH));
+		addKeybind("S", new PlayerMoveAction(Direction.SOUTH));
+		addKeybind("D", new PlayerMoveAction(Direction.EAST));
+		addKeybind("A", new PlayerMoveAction(Direction.WEST));
+		addKeybind("UP", new PlayerMoveAction(Direction.NORTH));
+		addKeybind("DOWN", new PlayerMoveAction(Direction.SOUTH));
+		addKeybind("RIGHT", new PlayerMoveAction(Direction.EAST));
+		addKeybind("LEFT", new PlayerMoveAction(Direction.WEST));
+		addKeybind("R", new AbstractAction()
+		{
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				reloadWorld();
+			}
+		});
+		addKeybind("Q", new AbstractAction()
+		{
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				drawMinimap = !drawMinimap;
+			}
+		});
 	}
 
 	public WorldView(int scale, World world)
@@ -39,28 +69,16 @@ public class WorldView extends View
 	{
 		if (world.checkWin())
 			loadNext();
-
-		if (keyTracker.isKeyDown(KeyEvent.VK_W) || keyTracker.isKeyDown(KeyEvent.VK_S)
-				|| keyTracker.isKeyDown(KeyEvent.VK_D) || keyTracker.isKeyDown(KeyEvent.VK_A))
-		{
-			Point playerCoords = world.getPlayerCoords();
-			Direction newDir = world.getObjects()[playerCoords.y][playerCoords.x].dir;
-			if (keyTracker.isKeyDown(KeyEvent.VK_W))
-				newDir = Direction.NORTH;
-			else if (keyTracker.isKeyDown(KeyEvent.VK_S))
-				newDir = Direction.SOUTH;
-			else if (keyTracker.isKeyDown(KeyEvent.VK_D))
-				newDir = Direction.EAST;
-			else
-				newDir = Direction.WEST;
-			world.getObjects()[playerCoords.y][playerCoords.x].dir = newDir;
-			world.movePlayer();
-		}
 	}
 
 	public void loadNext()
 	{
-		world = World.load("test" + i++);
+		world = World.load("test" + ++i);
+	}
+
+	public void reloadWorld()
+	{
+		world = World.load("test" + i);
 	}
 
 	@Override
@@ -69,10 +87,10 @@ public class WorldView extends View
 		super.paintComponent(g);
 		Point playerCoords = world.getPlayerCoords();
 		Graphics2D g2d = (Graphics2D) g;
-		
+
 		// Displace origin by player pos and center it
 		g2d.translate((widthInBlocks / 2 - playerCoords.x) * scale, (heightInBlocks / 2 - playerCoords.y) * scale);
-		
+
 		// Draw objects
 		for (int row = 0; row < world.getHeight(); row++)
 			for (int col = 0; col < world.getWidth(); col++)
@@ -81,15 +99,15 @@ public class WorldView extends View
 				if (world.getObjects()[row][col] != null)
 					world.getObjects()[row][col].render(g2d, col, row, scale);
 			}
-		
+
 		// Draw endpoints
 		for (Point point : world.endpoints)
 			g.drawImage(Images.getImage("endpoint"), point.x * scale, point.y * scale, scale, scale, null);
-		
+
 		// Reset origin
 		g2d.translate(-(widthInBlocks / 2 - playerCoords.x) * scale, -(heightInBlocks / 2 - playerCoords.y) * scale);
-		
-		if (keyTracker.isKeyDown(KeyEvent.VK_Q))
+
+		if (drawMinimap)
 		{
 			int scale = Math.min(getWidth(), getHeight()) / Math.max(world.getWidth(), world.getHeight());
 			g2d.scale(.5, .5);
@@ -110,5 +128,24 @@ public class WorldView extends View
 	public void setWorld(World world)
 	{
 		this.world = world;
+	}
+
+	class PlayerMoveAction extends AbstractAction
+	{
+		private static final long	serialVersionUID	= 1L;
+
+		private Direction			dir;
+
+		public PlayerMoveAction(Direction dir)
+		{
+			this.dir = dir;
+		}
+
+		@Override
+		public void actionPerformed(ActionEvent arg0)
+		{
+			world.getPlayer().changeDir(dir);
+			world.movePlayer();
+		}
 	}
 }
