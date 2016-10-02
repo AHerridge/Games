@@ -1,0 +1,40 @@
+package jrAlex.core;
+
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
+
+public class WorldObject
+{
+	protected Rectangle		bounds;
+	protected World			world;
+	protected ObjectType	type;
+
+	public WorldObject(ObjectType type, int col, int row, World world)
+	{
+		super();
+		this.bounds = new Rectangle(col, row, type.width, type.height);
+		this.world = world;
+		this.imageName = type.name();
+	}
+
+	public void update(int delta)
+	{
+
+	}
+
+	public void render(Graphics2D g, int scale)
+	{
+		g.drawImage(Images.getImage(imageName), bounds.x * scale, bounds.y * scale, bounds.width * scale,
+				bounds.height * scale, null);
+	}
+
+	public boolean collide(WorldObject wo)
+	{
+
+	}
+
+	public Rectangle getBounds()
+	{
+		return bounds;
+	}
+}

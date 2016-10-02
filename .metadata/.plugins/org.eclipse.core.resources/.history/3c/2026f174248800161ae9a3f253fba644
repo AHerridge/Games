@@ -1,0 +1,22 @@
+package jrAlex.core;
+
+import java.util.Random;
+
+public class Main
+{
+	public static void main(String[] args)
+	{
+		World world = World.load("test1");
+
+		WorldView worldView = new WorldView(world, 64);
+
+		MainWindow.setView(worldView);
+		MainWindow.getInstance().setVisible(true);
+		
+		while(true)
+		{
+			MainWindow.getInstance().update(16);
+			MainWindow.getInstance().repaint();
+		}
+	}
+}

@@ -1,0 +1,19 @@
+package jrAlex.core;
+
+public class Main
+{
+	public static void main(String[] args)
+	{
+		World world = new World(9, 64);
+
+		for (int row = 0; row < world.size; row++)
+			for (int col = 0; col < world.size; col++)
+				if (col == 0 || col == world.size - 1 || row == 0 || row == world.size - 1)
+					world.addObject(new WorldObject(ObjectType.Wall, world), col, row);
+		
+		WorldView worldView = new WorldView(world);
+		
+		MainWindow.setView(worldView);
+		System.out.println(world.toString());
+	}
+}

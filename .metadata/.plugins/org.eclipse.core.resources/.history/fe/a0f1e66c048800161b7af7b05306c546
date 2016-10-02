@@ -1,0 +1,14 @@
+package jrAlex.core;
+
+public enum ObjectType
+{
+	;
+	public int width, height;
+	public boolean solid;
+	private ObjectType(int width, int height, boolean solid)
+	{
+		this.width = width;
+		this.height = height;
+		this.solid = solid;
+	}
+}

@@ -1,34 +1,33 @@
 package jrAlex.core;
 
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 
 public class WorldObject
 {
-	protected Rectangle	bounds;
-	protected World		world;
-	protected String	imageName;
+	protected ObjectType	type;
+	protected Direction		dir;
 
-	public WorldObject(int col, int row, int width, int height, World world)
+	public WorldObject(ObjectType type)
 	{
 		super();
-		bounds = new Rectangle(col, row, width, height);
-		this.world = world;
+		this.type = type;
+		this.dir = Direction.NORTH;
 	}
 
-	public void update(int delta)
+	public void render(Graphics2D g, int col, int row, int scale)
 	{
-
+		g.drawImage(Images.getImage((type.dirImages) ? type.name() + "_" + dir.name() : type.name()), col * scale,
+				row * scale, scale, scale, null);
 	}
 
-	public void render(Graphics2D g, int scale)
+	public boolean isMoveable()
 	{
-		g.drawImage(Images.getImage(imageName), bounds.x * scale, bounds.y * scale, bounds.width * scale,
-				bounds.height * scale, null);
+		return type.moveable;
 	}
 
-	public Rectangle getBounds()
+	public void changeDir(Direction dir)
 	{
-		return bounds;
+		if (this.dir != dir)
+			this.dir = dir;
 	}
 }

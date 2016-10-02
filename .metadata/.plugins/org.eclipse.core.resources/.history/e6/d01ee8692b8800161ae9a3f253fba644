@@ -1,0 +1,33 @@
+package jrAlex.core;
+
+public class Main
+{
+	public static void main(String[] args)
+	{
+		World world = World.load("test1");
+
+		int oldCol = 2, oldRow = 2;
+		world.getObjects()[oldRow][oldCol].dir = Direction.EAST;
+		int newCol = oldCol + world.getObjects()[oldRow][oldCol].dir.colShift,
+				newRow = oldRow + world.getObjects()[oldRow][oldCol].dir.rowShift;
+		while (world.moveObject(oldCol, oldRow, oldCol + world.getObjects()[oldRow][oldCol].dir.colShift,
+				oldRow + world.getObjects()[oldRow][oldCol].dir.rowShift))
+		{
+			oldCol = newCol;
+			oldRow = newRow;
+			newCol = oldCol + world.getObjects()[oldRow][oldCol].dir.colShift;
+			newRow = oldRow + world.getObjects()[oldRow][oldCol].dir.rowShift;
+		}
+
+		WorldView worldView = new WorldView(world, 64);
+
+		MainWindow.setView(worldView);
+		MainWindow.getInstance().setVisible(true);
+
+		while (true)
+		{
+			MainWindow.getInstance().update(16);
+			MainWindow.getInstance().repaint();
+		}
+	}
+}

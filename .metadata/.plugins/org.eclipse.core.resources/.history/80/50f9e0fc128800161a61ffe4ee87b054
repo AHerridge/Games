@@ -1,0 +1,31 @@
+package jrAlex.core;
+
+import java.util.Random;
+
+public class Main
+{
+	public static void main(String[] args)
+	{
+		World world = new World(9, 64);
+
+		Random random = new Random();
+		
+		for (int row = 0; row < world.size; row++)
+			for (int col = 0; col < world.size; col++)
+			{
+				if (col == 0 || col == world.size - 1 || row == 0 || row == world.size - 1)
+					world.addObject(new WorldObject(ObjectType.WALL, world), col, row);
+				else if(random.nextInt(3) == 0)
+					world.addObject(new WorldObject(ObjectType.CRATE, world), col, row);
+				else
+					world.addObject(new WorldObject(ObjectType.PLAYER, world), 4, 4);
+			}
+		
+		WorldView worldView = new WorldView(world);
+		
+		MainWindow.setView(worldView);
+		MainWindow.getInstance().setVisible(true);
+		
+		System.out.println(world.toString());
+	}
+}

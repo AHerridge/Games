@@ -1,0 +1,34 @@
+package jrAlex.core;
+
+public class Entity extends WorldObject
+{
+	protected Direction dir;
+
+	public Entity(ObjectType type, int col, int row, World world)
+	{
+		super(type, col, row, world);
+	}
+
+	public void changeDir(Direction dir)
+	{
+		if (this.dir != dir)
+			this.dir = dir;
+	}
+
+	public void move()
+	{
+		bounds.translate(dir.colShift, dir.rowShift);
+		WorldObject collision = getCollisions();
+		if(collision == null || collision.collide())
+	}
+	
+	public void collide()
+	{
+		
+	}
+
+	public WorldObject getCollisions()
+	{
+		return world.getObjects()[bounds.y][bounds.x];
+	}
+}

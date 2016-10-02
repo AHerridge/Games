@@ -1,0 +1,19 @@
+package jrAlex.core;
+
+import javax.swing.JFrame;
+
+public class MainWindow extends JFrame
+{
+	private static final long		serialVersionUID	= 1L;
+	private static final MainWindow	instance = new MainWindow();
+
+	private MainWindow()
+	{
+
+	}
+	
+	public static MainWindow getInstance()
+	{
+		return instance;
+	}
+}

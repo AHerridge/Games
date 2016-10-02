@@ -1,0 +1,8 @@
+package jrAlex.core;
+
+public interface View
+{
+	public void update(int delta);
+	
+	public void render();
+}

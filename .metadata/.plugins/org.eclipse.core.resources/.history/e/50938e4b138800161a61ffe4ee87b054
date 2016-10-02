@@ -1,0 +1,11 @@
+package jrAlex.core;
+
+public class Endpoint
+{
+
+	public Endpoint()
+	{
+		// TODO Auto-generated constructor stub
+	}
+
+}

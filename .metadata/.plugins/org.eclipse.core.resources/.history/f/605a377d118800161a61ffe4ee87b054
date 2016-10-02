@@ -1,0 +1,13 @@
+package jrAlex.core;
+
+public enum ObjectType
+{
+	WALL(false), CRATE(true);
+
+	public boolean moveable;
+
+	private ObjectType(boolean moveable)
+	{
+		this.moveable = moveable;
+	}
+}

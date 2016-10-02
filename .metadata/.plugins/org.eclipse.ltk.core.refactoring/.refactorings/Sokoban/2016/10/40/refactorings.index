@@ -1,1 +1,8 @@
 1475280136370	Delete element
+1475346348413	Rename field 'solid'
+1475346361737	Rename local variable 'solid'
+1475348112706	Delete element
+1475349634907	Rename local variable 'view'
+1475352749617	Delete element
+1475363722716	Rename method 'changeUserDir'
+1475365324644	Rename resource 'test1.lvl'

@@ -1,9 +1,0 @@
-package jrAlex.core;
-
-public class World
-{
-	public World()
-	{
-		
-	}
-}

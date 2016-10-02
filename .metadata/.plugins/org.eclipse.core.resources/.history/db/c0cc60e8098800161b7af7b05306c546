@@ -1,0 +1,39 @@
+package jrAlex.core;
+
+import java.awt.Graphics2D;
+
+public class WorldObject
+{
+	protected ObjectType	type;
+	protected World			world;
+	protected Direction		dir;
+
+	public WorldObject(ObjectType type, World world)
+	{
+		super();
+		this.type = type;
+		this.world = world;
+		this.dir = Direction.NORTH;
+	}
+
+	public void update(int delta)
+	{
+
+	}
+
+	public void render(Graphics2D g, int col, int row, int scale)
+	{
+		g.drawImage(Images.getImage(type.name()), col * scale, row * scale, type.width * scale, type.height * scale, null);
+	}
+
+	public boolean isMoveable()
+	{
+		return type.moveable;
+	}
+
+	public void changeDir(Direction dir)
+	{
+		if (this.dir != dir)
+			this.dir = dir;
+	}
+}

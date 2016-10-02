@@ -1,0 +1,8 @@
+package jrAlex.core;
+
+import javax.swing.JPanel;
+
+public abstract class View extends JPanel
+{
+	public void update(int delta);
+}

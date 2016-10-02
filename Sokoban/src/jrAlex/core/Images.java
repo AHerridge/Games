@@ -23,7 +23,7 @@ public final class Images
 	{
 		try
 		{
-			return ImageIO.read(new File("./res/" + name + ".png"));
+			return ImageIO.read(new File("./res/images/" + name + ".png"));
 		}
 		catch (IOException e)
 		{

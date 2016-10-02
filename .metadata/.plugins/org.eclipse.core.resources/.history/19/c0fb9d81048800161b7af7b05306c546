@@ -1,0 +1,15 @@
+package jrAlex.core;
+
+public enum ObjectType
+{
+	Wall();
+	public int width, height;
+	public boolean moveable;
+	
+	private ObjectType(int width, int height, boolean solid)
+	{
+		this.width = width;
+		this.height = height;
+		this.moveable = solid;
+	}
+}
