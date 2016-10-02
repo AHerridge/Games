@@ -1,16 +1,19 @@
 package jrAlex.core;
 
-import com.google.gson.Gson;
-
 public class Main
 {
-	public static void main(String[] args)
+	public static void main(String[] args) throws InterruptedException
 	{
-		Gson g = new Gson();
-		World world = new World(64);
-		world.addObject(new Entity(0, 0, 1, 1, world));
-		String obj = g.toJson(world);
-		World world2 = g.fromJson(obj, World.class);
-		System.out.println(world2.scale);
+		WorldView worldView = new WorldView(64);
+		
+		MainWindow.setView(worldView);
+		MainWindow.getInstance().setVisible(true);
+		
+		while(true)
+		{
+			Thread.sleep(135);
+			MainWindow.getInstance().repaint();
+			MainWindow.getInstance().update(135);
+		}
 	}
 }

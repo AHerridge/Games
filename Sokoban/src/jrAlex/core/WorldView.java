@@ -5,7 +5,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 public class WorldView extends View
 {
@@ -13,22 +12,23 @@ public class WorldView extends View
 
 	protected int				scale, i, widthInBlocks, heightInBlocks;
 	protected World				world;
+	protected KeyTracker		keyTracker;
 
 	public WorldView(int scale)
 	{
+		setSize(MainWindow.getInstance().getWidth(), MainWindow.getInstance().getHeight());
 		this.i = 2;
-		this.widthInBlocks = 9;
-		this.heightInBlocks = 9;
-		loadNext();
 		this.scale = scale;
+		this.widthInBlocks = getWidth() / scale;
+		this.heightInBlocks = getHeight() / scale;
+		loadNext();
 		setBackground(Color.white);
-		setSize(widthInBlocks * scale, heightInBlocks * scale);
-		addKeyListener(new KeyboardControl());
+		addKeyListener(keyTracker = new KeyTracker());
 		setFocusable(true);
 		grabFocus();
 	}
 
-	public WorldView(World world, int scale)
+	public WorldView(int scale, World world)
 	{
 		this(scale);
 		this.world = world;
@@ -39,6 +39,23 @@ public class WorldView extends View
 	{
 		if (world.checkWin())
 			loadNext();
+
+		if (keyTracker.isKeyDown(KeyEvent.VK_W) || keyTracker.isKeyDown(KeyEvent.VK_S)
+				|| keyTracker.isKeyDown(KeyEvent.VK_D) || keyTracker.isKeyDown(KeyEvent.VK_A))
+		{
+			Point playerCoords = world.getPlayerCoords();
+			Direction newDir = world.getObjects()[playerCoords.y][playerCoords.x].dir;
+			if (keyTracker.isKeyDown(KeyEvent.VK_W))
+				newDir = Direction.NORTH;
+			else if (keyTracker.isKeyDown(KeyEvent.VK_S))
+				newDir = Direction.SOUTH;
+			else if (keyTracker.isKeyDown(KeyEvent.VK_D))
+				newDir = Direction.EAST;
+			else
+				newDir = Direction.WEST;
+			world.getObjects()[playerCoords.y][playerCoords.x].dir = newDir;
+			world.movePlayer();
+		}
 	}
 
 	public void loadNext()
@@ -52,8 +69,11 @@ public class WorldView extends View
 		super.paintComponent(g);
 		Point playerCoords = world.getPlayerCoords();
 		Graphics2D g2d = (Graphics2D) g;
-		g2d.translate(widthInBlocks / 2 * scale, heightInBlocks / 2 * scale);
-		g2d.translate(-playerCoords.x * scale, -playerCoords.y * scale);
+		
+		// Displace origin by player pos and center it
+		g2d.translate((widthInBlocks / 2 - playerCoords.x) * scale, (heightInBlocks / 2 - playerCoords.y) * scale);
+		
+		// Draw objects
 		for (int row = 0; row < world.getHeight(); row++)
 			for (int col = 0; col < world.getWidth(); col++)
 			{
@@ -61,45 +81,34 @@ public class WorldView extends View
 				if (world.getObjects()[row][col] != null)
 					world.getObjects()[row][col].render(g2d, col, row, scale);
 			}
+		
+		// Draw endpoints
 		for (Point point : world.endpoints)
 			g.drawImage(Images.getImage("endpoint"), point.x * scale, point.y * scale, scale, scale, null);
+		
+		// Reset origin
+		g2d.translate(-(widthInBlocks / 2 - playerCoords.x) * scale, -(heightInBlocks / 2 - playerCoords.y) * scale);
+		
+		if (keyTracker.isKeyDown(KeyEvent.VK_Q))
+		{
+			int scale = Math.min(getWidth(), getHeight()) / Math.max(world.getWidth(), world.getHeight());
+			g2d.scale(.5, .5);
+			g2d.fill(getBounds());
+			for (int row = 0; row < world.getHeight(); row++)
+				for (int col = 0; col < world.getWidth(); col++)
+				{
+					g2d.drawImage(Images.getImage("floor"), col * scale, row * scale, scale, scale, null);
+					if (world.getObjects()[row][col] != null)
+						world.getObjects()[row][col].render(g2d, col, row, scale);
+				}
+			for (Point point : world.endpoints)
+				g.drawImage(Images.getImage("endpoint"), point.x * scale, point.y * scale, scale, scale, null);
+			g2d.scale(2, 2);
+		}
 	}
 
 	public void setWorld(World world)
 	{
 		this.world = world;
-	}
-
-	class KeyboardControl implements KeyListener
-	{
-
-		@Override
-		public void keyPressed(KeyEvent e)
-		{
-			if (e.getKeyCode() == KeyEvent.VK_W)
-				world.changePlayerDir(Direction.NORTH);
-			else if (e.getKeyCode() == KeyEvent.VK_S)
-				world.changePlayerDir(Direction.SOUTH);
-			else if (e.getKeyCode() == KeyEvent.VK_A)
-				world.changePlayerDir(Direction.WEST);
-			else if (e.getKeyCode() == KeyEvent.VK_D)
-				world.changePlayerDir(Direction.EAST);
-
-			if (e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_A
-					|| e.getKeyCode() == KeyEvent.VK_D)
-				world.movePlayer();
-		}
-
-		@Override
-		public void keyReleased(KeyEvent e)
-		{
-
-		}
-
-		@Override
-		public void keyTyped(KeyEvent e)
-		{
-
-		}
 	}
 }

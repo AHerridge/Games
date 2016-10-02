@@ -15,7 +15,7 @@ public class MainWindow extends JFrame
 	{
 		setBackground(Color.white);
 		setResizable(false);
-		setSize(576 + 6, 576 + 29);
+		setSize(12 * 64 + 6, 12 * 64 + 29);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
