@@ -1,0 +1,11 @@
+package jrAlex.core;
+
+public class GameView
+{
+
+	public GameView()
+	{
+		// TODO Auto-generated constructor stub
+	}
+
+}

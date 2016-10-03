@@ -1,0 +1,113 @@
+package jrAlex.core;
+
+import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
+
+import javax.swing.AbstractAction;
+
+public class WorldEditorView extends WorldView
+{
+	private static final long	serialVersionUID	= 1L;
+
+	private int					blockIndex;
+
+	public WorldEditorView(int width, int height)
+	{
+		super(MainWindow.getInstance().getWidth() / Math.max(width, height));
+		this.blockIndex = 0;
+		center = false;
+		world = new World(new WorldObject[height][width], new ArrayList<Point>());
+		addKeybind("UP", new AbstractAction()
+		{
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				if (blockIndex >= ObjectType.values().length)
+					blockIndex = -1;
+				else
+					blockIndex++;
+			}
+		});
+		addKeybind("DOWN", new AbstractAction()
+		{
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				if (blockIndex < -1)
+					blockIndex = ObjectType.values().length - 1;
+				else
+					blockIndex--;
+			}
+		});
+		addMouseListener(new MouseListener()
+		{
+
+			@Override
+			public void mouseReleased(MouseEvent e)
+			{
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e)
+			{
+				int col = e.getX() / scale;
+				int row = e.getY() / scale;
+				if (col >= 0 && col < world.getWidth() && row >= 0 && row < world.getHeight())
+				{
+					if (e.getButton() == 1)
+						changeBlock(col, row, ObjectType.getIndexOf(blockIndex));
+					else if (e.getButton() == 0)
+						if (world.endpoints.contains(new Point(col, row)))
+							world.endpoints.remove(new Point(col, row));
+						else
+							world.endpoints.add(new Point(col, row));
+				}
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e)
+			{
+
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e)
+			{
+
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e)
+			{
+
+			}
+		});
+	}
+
+	public void changeBlock(int col, int row, ObjectType type)
+	{
+		world.objects[row][col] = new WorldObject(type);
+	}
+
+	@Override
+	public void update(int delta)
+	{
+
+	}
+
+	@Override
+	protected void paintComponent(Graphics g)
+	{
+		super.paintComponent(g);
+	}
+
+}

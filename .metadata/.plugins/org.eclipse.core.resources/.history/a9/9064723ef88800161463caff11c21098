@@ -1,0 +1,151 @@
+package jrAlex.core;
+
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.util.ArrayList;
+
+import javax.swing.AbstractAction;
+
+public class WorldEditorView extends WorldView
+{
+	private static final long	serialVersionUID	= 1L;
+
+	private int					blockIndex, mouseCol, mouseRow;
+
+	public WorldEditorView(int width, int height)
+	{
+		super(MainWindow.getInstance().getWidth() / Math.max(width, height));
+		this.blockIndex = 0;
+		center = false;
+		world = new World(new WorldObject[height][width], new ArrayList<Point>());
+		addKeybind("UP", new AbstractAction()
+		{
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				if (blockIndex >= ObjectType.values().length)
+					blockIndex = 0;
+				else
+					blockIndex++;
+			}
+		});
+		addKeybind("DOWN", new AbstractAction()
+		{
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				if (blockIndex < -1)
+					blockIndex = ObjectType.values().length - 1;
+				else
+					blockIndex--;
+			}
+		});
+		addMouseListener(new MouseListener()
+		{
+			@Override
+			public void mouseReleased(MouseEvent e)
+			{
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e)
+			{
+				if (mouseCol >= 0 && mouseCol < world.getWidth() && mouseRow >= 0 && mouseRow < world.getHeight())
+				{
+					if (e.getButton() == 1)
+					{
+						if (ObjectType.getIndexOf(blockIndex) == null)
+							changeBlock(mouseCol, mouseRow, null);
+						else
+							changeBlock(mouseCol, mouseRow, new WorldObject(ObjectType.getIndexOf(blockIndex)));
+					}
+					else if (e.getButton() == 3)
+						if (world.endpoints.contains(new Point(mouseCol, mouseRow)))
+							world.endpoints.remove(new Point(mouseCol, mouseRow));
+						else
+							world.endpoints.add(new Point(mouseCol, mouseRow));
+				}
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e)
+			{
+
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e)
+			{
+
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e)
+			{
+
+			}
+		});
+		addMouseMotionListener(new MouseMotionListener()
+		{
+			@Override
+			public void mouseMoved(MouseEvent e)
+			{
+				mouseCol = e.getX() / scale;
+				mouseRow = e.getY() / scale;
+			}
+
+			@Override
+			public void mouseDragged(MouseEvent e)
+			{
+				mouseCol = e.getX() / scale;
+				mouseRow = e.getY() / scale;
+
+				if (mouseCol >= 0 && mouseCol < world.getWidth() && mouseRow >= 0 && mouseRow < world.getHeight())
+				{
+					if (e.getButton() == 1)
+					{
+						if (ObjectType.getIndexOf(blockIndex) == null)
+							changeBlock(mouseCol, mouseRow, null);
+						else
+							changeBlock(mouseCol, mouseRow, new WorldObject(ObjectType.getIndexOf(blockIndex)));
+					}
+					else if (e.getButton() == 3)
+						if (world.endpoints.contains(new Point(mouseCol, mouseRow)))
+							world.endpoints.remove(new Point(mouseCol, mouseRow));
+						else
+							world.endpoints.add(new Point(mouseCol, mouseRow));
+				}
+			}
+		});
+	}
+
+	public void changeBlock(int col, int row, WorldObject wo)
+	{
+		world.objects[row][col] = wo;
+	}
+
+	@Override
+	public void update(int delta)
+	{
+
+	}
+
+	@Override
+	protected void paintComponent(Graphics g)
+	{
+		super.paintComponent(g);
+		if (ObjectType.getIndexOf(blockIndex) != null)
+			new WorldObject(ObjectType.getIndexOf(blockIndex)).render((Graphics2D) g, mouseCol, mouseRow, scale);
+	}
+
+}

@@ -1,0 +1,10 @@
+package jrAlex.core;
+
+public class GameView extends WorldView
+{
+	public GameView(int scale)
+	{
+		super(scale);
+		// TODO Auto-generated constructor stub
+	}
+}

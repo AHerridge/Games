@@ -4,12 +4,12 @@ public class Main
 {
 	public static void main(String[] args) throws InterruptedException
 	{
-		WorldView worldView = new WorldView(64);
-		
+		WorldEditorView worldView = new WorldEditorView(16, 13);
+
 		MainWindow.setView(worldView);
 		MainWindow.getInstance().setVisible(true);
-		
-		while(true)
+
+		while (true)
 		{
 			Thread.sleep(16);
 			MainWindow.getInstance().repaint();

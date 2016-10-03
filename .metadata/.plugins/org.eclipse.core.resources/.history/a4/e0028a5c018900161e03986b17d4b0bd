@@ -1,0 +1,19 @@
+package jrAlex.core;
+
+public class Main
+{
+	public static void main(String[] args) throws InterruptedException
+	{
+		WorldEditorView worldView = new WorldEditorView(16, 14);
+
+		MainWindow.setView(worldView);
+		MainWindow.getInstance().setVisible(true);
+
+		while (true)
+		{
+			Thread.sleep(16);
+			MainWindow.getInstance().repaint();
+			MainWindow.getInstance().update(16);
+		}
+	}
+}

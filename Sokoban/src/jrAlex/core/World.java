@@ -1,16 +1,29 @@
 package jrAlex.core;
 
 import java.awt.Point;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
+import javax.swing.JFileChooser;
 
 public class World
 {
 	protected WorldObject[][]	objects;
-	protected Point[]			endpoints;
+	protected List<Point>		endpoints;
 
-	public World(WorldObject[][] objects, Point[] endpoints)
+	public World(int width, int height)
+	{
+		this.objects = new WorldObject[height][width];
+		this.endpoints = new ArrayList<>();
+	}
+
+	public World(WorldObject[][] objects, List<Point> endpoints)
 	{
 		this.objects = objects;
 		this.endpoints = endpoints;
@@ -113,11 +126,11 @@ public class World
 			}
 
 			String[] pointStrings = scanner.nextLine().split(", ");
-			Point[] points = new Point[pointStrings.length];
-			for (int i = 0; i < points.length; i++)
+			List<Point> points = new ArrayList<Point>(pointStrings.length);
+			for (int i = 0; i < pointStrings.length; i++)
 			{
 				String[] pointProps = pointStrings[i].split(" ");
-				points[i] = new Point(Integer.parseInt(pointProps[0]), Integer.parseInt(pointProps[1]));
+				points.set(i, new Point(Integer.parseInt(pointProps[0]), Integer.parseInt(pointProps[1])));
 			}
 
 			scanner.close();
@@ -128,6 +141,37 @@ public class World
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public void save()
+	{
+		try
+		{
+			JFileChooser saveFile = new JFileChooser();
+			saveFile.showSaveDialog(null);
+			BufferedWriter br = new BufferedWriter(new FileWriter(saveFile.getSelectedFile()));
+			br.write(getWidth() + " " + getHeight());
+
+			for (int row = 0; row < getHeight(); row++)
+			{
+				br.newLine();
+				for (int col = 0; col < getWidth(); col++)
+					if (objects[row][col] == null)
+						br.write(0 + ", ");
+					else
+						br.write(ObjectType.getIndexOf(objects[row][col].type) + 1 + ", ");
+			}
+
+			br.newLine();
+			for (Point point : endpoints)
+				br.write(point.x + " " + point.y + ", ");
+
+			br.close();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	public boolean checkWin()

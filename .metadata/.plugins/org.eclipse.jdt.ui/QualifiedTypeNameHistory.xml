@@ -55,4 +55,8 @@
 <fullyQualifiedTypeName name="jrAlex.core.WorldView.PlayerMoveAction"/>
 <fullyQualifiedTypeName name="jrAlex.core.Direction"/>
 <fullyQualifiedTypeName name="javax.swing.AbstractAction"/>
+<fullyQualifiedTypeName name="javax.swing.filechooser.FileFilter"/>
+<fullyQualifiedTypeName name="java.nio.file.spi.FileTypeDetector"/>
+<fullyQualifiedTypeName name="java.net.URL"/>
+<fullyQualifiedTypeName name="java.net.URLConnection"/>
 </qualifiedTypeNameHistroy>
