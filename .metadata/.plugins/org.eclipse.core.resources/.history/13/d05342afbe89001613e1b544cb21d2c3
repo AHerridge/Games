@@ -1,0 +1,104 @@
+package jrAlex.core;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
+
+public class WorldView extends View
+{
+	private static final long	serialVersionUID	= 1L;
+
+	protected int				scale, i, widthInBlocks, heightInBlocks, offsetCol, offsetRow;
+	protected World				world;
+	protected boolean			drawMinimap, center;
+
+	public WorldView(int scale)
+	{
+		setSize(MainWindow.getInstance().getWidth(), MainWindow.getInstance().getHeight());
+		this.i = 1;
+		this.scale = scale;
+		this.widthInBlocks = getWidth() / scale;
+		this.heightInBlocks = getHeight() / scale;
+		this.drawMinimap = false;
+		this.center = true;
+		setBackground(Color.white);
+		setFocusable(true);
+		grabFocus();
+	}
+
+	public WorldView(int scale, World world)
+	{
+		this(scale);
+		this.world = world;
+	}
+	
+	@Override
+	public void update(int delta)
+	{
+		Point playerCoords = world.getPlayerCoords();
+		offsetCol = playerCoords.x;
+		offsetRow = playerCoords.y;
+	}
+
+	public void loadNext()
+	{
+		world = World.load("Sasquatch" + ++i);
+	}
+
+	public void reloadWorld()
+	{
+		world = World.load("Sasquatch" + i);
+	}
+
+	@Override
+	protected void paintComponent(Graphics g)
+	{
+		super.paintComponent(g);
+		Graphics2D g2d = (Graphics2D) g;
+
+		if (center)
+			// Displace origin by player pos and center it
+			g2d.translate((widthInBlocks / 2 - offsetCol) * scale, (heightInBlocks / 2 - offsetRow) * scale);
+
+		// Draw objects
+		for (int row = 0; row < world.getHeight(); row++)
+			for (int col = 0; col < world.getWidth(); col++)
+			{
+				g2d.drawImage(Images.getImage("floor"), col * scale, row * scale, scale, scale, null);
+				if (world.getObjects()[row][col] != null)
+					world.getObjects()[row][col].render(g2d, col, row, scale);
+				g2d.drawRect(col * scale, row * scale, scale, scale);
+			}
+
+		// Draw endpoints
+		for (Point point : world.endpoints)
+			g.drawImage(Images.getImage("endpoint"), point.x * scale, point.y * scale, scale, scale, null);
+
+		if (center)
+			// Reset origin
+			g2d.translate(-(widthInBlocks / 2 - offsetCol) * scale, -(heightInBlocks / 2 - offsetRow) * scale);
+
+		if (drawMinimap)
+		{
+			int scale = Math.min(getWidth(), getHeight()) / Math.max(world.getWidth(), world.getHeight());
+			g2d.scale(.5, .5);
+			g2d.fill(getBounds());
+			for (int row = 0; row < world.getHeight(); row++)
+				for (int col = 0; col < world.getWidth(); col++)
+				{
+					g2d.drawImage(Images.getImage("floor"), col * scale, row * scale, scale, scale, null);
+					if (world.getObjects()[row][col] != null)
+						world.getObjects()[row][col].render(g2d, col, row, scale);
+				}
+			for (Point point : world.endpoints)
+				g.drawImage(Images.getImage("endpoint"), point.x * scale, point.y * scale, scale, scale, null);
+			g2d.scale(2, 2);
+		}
+	}
+
+	public void setWorld(World world)
+	{
+		this.world = world;
+	}
+}

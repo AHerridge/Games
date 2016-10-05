@@ -1,5 +1,6 @@
 package jrAlex.core;
 
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
@@ -7,10 +8,13 @@ import javax.swing.AbstractAction;
 public class GameView extends WorldView
 {
 	private static final long serialVersionUID = 1L;
+	
+	private Difficulty difficulty;
 
-	public GameView(int scale)
+	public GameView(int scale, Difficulty difficulty)
 	{
 		super(scale);
+		this.difficulty = difficulty;
 		loadNext();
 		addKeybind("W", new PlayerMoveAction(Direction.NORTH));
 		addKeybind("S", new PlayerMoveAction(Direction.SOUTH));
@@ -41,14 +45,30 @@ public class GameView extends WorldView
 			}
 		});
 	}
-	
+
 	@Override
 	public void update(int delta)
 	{
+		super.update(delta);
+
 		if (world.checkWin())
 			loadNext();
+
+		Point playerCoords = world.getPlayerCoords();
+		offsetCol = playerCoords.x;
+		offsetRow = playerCoords.y;
 	}
 
+	public void loadNext()
+	{
+		world = World.load(difficulty.name() + ++i);
+	}
+
+	public void reloadWorld()
+	{
+		world = World.load(difficulty.name() + i);
+	}
+	
 	class PlayerMoveAction extends AbstractAction
 	{
 		private static final long	serialVersionUID	= 1L;

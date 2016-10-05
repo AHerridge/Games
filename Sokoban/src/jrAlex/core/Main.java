@@ -4,9 +4,7 @@ public class Main
 {
 	public static void main(String[] args) throws InterruptedException
 	{
-		WorldEditorView worldView = new WorldEditorView(16, 13);
-
-		MainWindow.setView(worldView);
+		MainWindow.setView(new MenuView());
 		MainWindow.getInstance().setVisible(true);
 
 		while (true)

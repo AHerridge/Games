@@ -16,7 +16,7 @@ public class WorldView extends View
 	public WorldView(int scale)
 	{
 		setSize(MainWindow.getInstance().getWidth(), MainWindow.getInstance().getHeight());
-		this.i = 1;
+		this.i = 0;
 		this.scale = scale;
 		this.widthInBlocks = getWidth() / scale;
 		this.heightInBlocks = getHeight() / scale;
@@ -36,19 +36,7 @@ public class WorldView extends View
 	@Override
 	public void update(int delta)
 	{
-		Point playerCoords = world.getPlayerCoords();
-		offsetCol = playerCoords.x;
-		offsetRow = playerCoords.y;
-	}
-
-	public void loadNext()
-	{
-		world = World.load("Sasquatch" + ++i);
-	}
-
-	public void reloadWorld()
-	{
-		world = World.load("Sasquatch" + i);
+		
 	}
 
 	@Override

@@ -24,8 +24,9 @@ public class MainWindow extends JFrame
 	{
 		if (currentView != newView)
 		{
+			if (currentView != null)
+				instance.remove(currentView);
 			currentView = newView;
-			instance.remove(currentView);
 			instance.add(newView);
 		}
 	}

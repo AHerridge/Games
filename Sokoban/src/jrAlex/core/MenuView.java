@@ -1,0 +1,105 @@
+package jrAlex.core;
+
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
+
+public class MenuView extends View
+{
+	private static final long		serialVersionUID	= 1L;
+
+	private JButton					playButton, editorButton, quitButton;
+	private JComboBox<Difficulty>	difficultyMenu;
+	private JSpinner				editorWidth, editorHeight;
+
+	public MenuView()
+	{
+		super();
+		setLayout(new GridBagLayout());
+		GridBagConstraints gbc = new GridBagConstraints(0, 0, 2, 1, .5, .5, GridBagConstraints.CENTER,
+				GridBagConstraints.BOTH, new Insets(20, 40, 20, 40), 30, 30);
+
+		ActionListener buttonListener = new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				buttonClicked((JButton) e.getSource());
+			}
+		};
+
+		add(playButton = new JButton("Play")
+		{
+			private static final long serialVersionUID = 1L;
+
+			{
+				addActionListener(buttonListener);
+			}
+		}, gbc);
+
+		gbc.gridx = 2;
+		gbc.gridwidth = 1;
+		add(difficultyMenu = new JComboBox<Difficulty>()
+		{
+			private static final long serialVersionUID = 1L;
+
+			{
+				addItem(Difficulty.EASY);
+				addItem(Difficulty.MEDIUM);
+				addItem(Difficulty.HARD);
+			}
+		}, gbc);
+
+		gbc.gridx = 0;
+		gbc.gridy = 1;
+		add(editorButton = new JButton("Editor")
+		{
+			private static final long serialVersionUID = 1L;
+
+			{
+				addActionListener(buttonListener);
+			}
+		}, gbc);
+
+		gbc.gridx = 1;
+		add(editorWidth = new JSpinner(new SpinnerNumberModel(10, 1, Integer.MAX_VALUE, 1)), gbc);
+
+		gbc.gridx = 2;
+		add(editorHeight = new JSpinner(new SpinnerNumberModel(10, 1, Integer.MAX_VALUE, 1)), gbc);
+
+		gbc.gridx = 0;
+		gbc.gridy = 2;
+		gbc.gridwidth = 3;
+		add(quitButton = new JButton("Quit")
+		{
+			private static final long serialVersionUID = 1L;
+
+			{
+				addActionListener(buttonListener);
+			}
+		}, gbc);
+	}
+
+	public void buttonClicked(JButton button)
+	{
+		if (button == playButton)
+			MainWindow.setView(new GameView(64, (Difficulty) difficultyMenu.getSelectedItem()));
+		else if (button == editorButton)
+			MainWindow.setView(new WorldEditorView((int) editorWidth.getValue(), (int) editorHeight.getValue()));
+		else if (button == quitButton)
+			System.exit(0);
+	}
+
+	@Override
+	public void update(int delta)
+	{
+
+	}
+}

@@ -24,12 +24,4 @@ public enum ObjectType
 			return ObjectType.values()[i];
 		return null;
 	}
-	
-	public static int getIndexOf(ObjectType type)
-	{
-		for(int i = 0; i < ObjectType.values().length; i++)
-			if(ObjectType.values()[i] == type)
-				return i;
-		return -1;
-	}
 }

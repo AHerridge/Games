@@ -130,7 +130,7 @@ public class World
 			for (int i = 0; i < pointStrings.length; i++)
 			{
 				String[] pointProps = pointStrings[i].split(" ");
-				points.set(i, new Point(Integer.parseInt(pointProps[0]), Integer.parseInt(pointProps[1])));
+				points.add(new Point(Integer.parseInt(pointProps[0]), Integer.parseInt(pointProps[1])));
 			}
 
 			scanner.close();
@@ -159,7 +159,7 @@ public class World
 					if (objects[row][col] == null)
 						br.write(0 + ", ");
 					else
-						br.write(ObjectType.getIndexOf(objects[row][col].type) + 1 + ", ");
+						br.write(objects[row][col].type.ordinal() + 1 + ", ");
 			}
 
 			br.newLine();
